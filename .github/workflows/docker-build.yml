@@ -54,10 +54,10 @@ jobs:
 
       - name: Build Docker Image - Node (sha + latest)
         run: |
-          docker build -t mra00000/simple-novnc:node-${{ steps.vars.outputs.sha_tag }} -f Dockerfile.node .
-          docker tag mra00000/simple-novnc:node-${{ steps.vars.outputs.sha_tag }} mra00000/simple-novnc:node-latest
+          docker build -t mra00000/simple-novnc:node:${{ steps.vars.outputs.sha_tag }} -f Dockerfile.node .
+          docker tag mra00000/simple-novnc:node:${{ steps.vars.outputs.sha_tag }} mra00000/simple-novnc:node:latest
 
       - name: Push Docker Images - Node
         run: |
-          docker push mra00000/simple-novnc:node-${{ steps.vars.outputs.sha_tag }}
-          docker push mra00000/simple-novnc:node-latest
+          docker push mra00000/simple-novnc:node:${{ steps.vars.outputs.sha_tag }}
+          docker push mra00000/simple-novnc:node:latest
