@@ -47,17 +47,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set image tags
-        id: vars
+      - name: Build Docker Image - Node
         run: |
-          echo "sha_tag=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
-
-      - name: Build Docker Image - Node (sha + latest)
-        run: |
-          docker build -t mra00000/simple-novnc:node:${{ steps.vars.outputs.sha_tag }} -f Dockerfile.node .
-          docker tag mra00000/simple-novnc:node:${{ steps.vars.outputs.sha_tag }} mra00000/simple-novnc:node:latest
+          docker build -t mra00000/simple-novnc:node -f Dockerfile.node .
+          docker tag mra00000/simple-novnc:node mra00000/simple-novnc:node
 
       - name: Push Docker Images - Node
-        run: |
-          docker push mra00000/simple-novnc:node:${{ steps.vars.outputs.sha_tag }}
-          docker push mra00000/simple-novnc:node:latest
+        run: docker push mra00000/simple-novnc:node
